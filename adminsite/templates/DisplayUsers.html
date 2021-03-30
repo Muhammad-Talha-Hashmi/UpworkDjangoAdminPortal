@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}s
+{% block content %}
+<title>Users</title>
+{#{% if user.is_authenticated %}#}
+    <!--breadcrumbs start -->
+      <nav aria-label="breadcrumb">
+       <ol class="breadcrumb">
+{#         <li class="breadcrumb-item"><a href="{% url 'home' %}">Dashboard</a></li>#}
+         <li class="breadcrumb-item active" aria-current="page">Users</li>
+       </ol>
+      </nav>
+    <!--breadcrumbs end -->
+
+    <section class="panel">
+          <table class="table">
+              <thead>
+              <tr>
+                  <th>User</th>
+                  <th>Actions</th>
+              </tr>
+              </thead>
+              <tbody>
+              {% for post in object_list %}
+              <tr>
+                  <td>
+                      <h5><a href="{% url 'view_user' post.pk %}">{{ post.fullname }}</a></h5>
+                  </td>
+                  <td>
+                      <button type="button" onclick="location.href='{% url 'view_user' pk=post.pk %}';" class="btn btn-info btn-sm mb-2">View</button>
+                      <button type="button" onclick="location.href='{% url 'update_user' pk=post.pk %}';" class="btn btn-warning btn-sm mb-2">Edit</button>
+                      <button type="button" onclick="location.href='{% url 'user_delete' pk=post.pk %}';" class="btn btn-danger btn-sm mb-2">Delete</button>
+                  </td>
+              </tr>
+              {% endfor %}
+              </tbody>
+          </table>
+      </section>
+{#    {% else %}#}
+{#    return redirect(error) #should have the error page here#}
+{#{% endif %}#}
+    </section>
+
+{% endblock %}

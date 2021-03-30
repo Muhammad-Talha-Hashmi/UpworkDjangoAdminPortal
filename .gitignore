@@ -1,0 +1,9 @@
+# database &git config  --global user.name "ro2cool" logs
+*.db
+*.sqlite3
+*.log
+.idea
+# venv
+env
+venv
+/adminsite/migrations/

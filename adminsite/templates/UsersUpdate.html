@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% load crispy_forms_filters %}
+{#{% load crispy_forms_filters %}#}
+{% load static %}
+
+{% block content %}
+    {#    {% load crispy_forms_tags %}#}
+    <title>Users</title>
+    {#{% if user.is_authenticated %}#}
+    <!--breadcrumbs start -->
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            {#         <li class="breadcrumb-item"><a href="{% url 'home' %}">Dashboard</a></li>#}
+            <li class="breadcrumb-item"><a href="{% url 'users' %}">Users</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Update</li>
+        </ol>
+    </nav>
+    <!--breadcrumbs end -->
+
+    <section class="panel">
+        <div class="panel-body">
+            <div class="col-sm-12">
+                <section class="panel">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>University</th>
+                            <th>Department</th>
+                            <th>Role</th>
+                            <th>Status</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>
+                                <h5>{{ object.fullname }}</h5>
+                            </td>
+                            <td>
+                                <h5>{{ object.university }}</h5>
+                            </td>
+                            <td>
+                                <h5>{{ object.department }}</h5>
+                            </td>
+                            <td>
+                                <div class="form-group" >
+                                    <form id="user_form" method="post" action="?">
+                                        {% csrf_token %}
+                                        <div class="col-lg-10">{{ form.role | as_crispy_field }}</div>
+                                    </form>
+                                </div>
+                            </td>
+                            <td>
+                                <h5>{{ object.status }}</h5>
+                            </td>
+
+                        </tr>
+                        </tbody>
+                    </table>
+                </section>
+                <div class="pull-right hidden-phone">
+                    <button  type="button" onclick="submit()" class="btn btn-primary">Save</button>
+                </div>
+                <br>
+                <button type="button" onclick="location.href='{% url 'users' %}';"
+                        class="btn btn-warning btn-sm mb-2"><i class="fa fa-chevron-left"></i> Back
+                </button>
+            </div>
+        </div>
+    </section>
+    {#    {% else %}#}
+    {#    return redirect(error) #should have the error page here#}
+    {#{% endif %}#}
+    <script type="text/javascript">
+    function submit(e) {
+        console.log("in submit")
+        document.getElementById("user_form").submit();
+        console.log( document.getElementById("user_form"))
+    }
+    </script>
+{% endblock %}
+
