@@ -3,12 +3,12 @@
 {% load crispy_forms_tags %}
 {% block content %}
 <title>Requests</title>
-{% if user.is_authenticated %}
+{#{% if user.is_authenticated %}#}
    <!--breadcrumbs start -->
       <nav aria-label="breadcrumb">
        <ol class="breadcrumb">
-         <li class="breadcrumb-item"><a href="{% url 'home' %}">Dashboard</a></li>
-           <li class="breadcrumb-item"><a href="{% url 'requests' %}">Requests</a></li>
+{#         <li class="breadcrumb-item"><a href="{% url 'home' %}">Dashboard</a></li>#}
+           <li class="breadcrumb-item"><a href="{% url 'users' %}">Users</a></li>
          <li class="breadcrumb-item active" aria-current="page">Delete</li>
        </ol>
       </nav>
@@ -52,21 +52,30 @@
                           </table>
                </section>
                <div class="form-group">
-                  <form method="post">
+                  <form  id="user_form" method="post">
                      {% csrf_token %}
                        <div class="pull-right hidden-phone">
-                          <button value="Confirm" class="btn btn-danger btn-sm mb-2">Delete</button>
+                          <button value="Confirm" onclick="submit()" class="btn btn-danger btn-sm mb-2">Delete</button>
                           </div>
                   </form>
                </div>
-                  <br><button type="button" onclick="location.href='{% url 'requests' %}';"
+                  <br><button type="button" onclick="location.href='{% url 'users' %}';"
                           class="btn btn-warning btn-sm mb-2"><i class="fa fa-chevron-left"></i> Back</button>
           </div>
        </div>
 </section>
-{% else %}
-    return redirect(error) #should have the error page here
-{% endif %}
+{#{% else %}#}
+{#    return redirect(error) #should have the error page here#}
+{#{% endif %}#}
+{% block javascript %}
 
+    <script type="text/javascript">
+    function submit(e) {
+        console.log("in submit")
+        document.getElementById("user_form").submit();
+        console.log( document.getElementById("user_form"))
+    }
+    </script>
+{% endblock %}
 
 {% endblock %}
